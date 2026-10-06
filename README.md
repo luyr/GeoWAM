@@ -8,7 +8,9 @@
 
 The code and models for GeoWAM will be released here. Stay tuned!
 
-GeoWAM is a visual geometry world action model for autonomous driving. Rather than predicting future images, GeoWAM is pretrained to forecast future 3D scene geometry, and a geometry-conditioned action head then leverages these learned geometric dynamics to predict future ego trajectories. GeoWAM achieves a combined EPDMS of 39.6 on NAVSIM `navhard` without PDMS supervision and a 0.12% collision rate in zero-shot planning on nuScenes, and its planning performance keeps improving as geometry pretraining scales with unlabeled driving data.
+GeoWAM is a visual geometry world action model for autonomous driving that treats 3D geometry, rather than pixels, as the state space of the world. Instead of generating future images, GeoWAM is pretrained to forecast future scene geometry as dense point maps, and a geometry-conditioned action head infers the ego trajectory consistent with the predicted scene evolution.
+
+Because geometry pretraining learns directly from raw multiview image sequences, it scales with unlabeled driving data and needs no trajectory annotations. Scaling pretraining from 0 to 832 hours of PhysicalAI driving data raises the NAVSIM `navhard` EPDMS by 8.2% to 39.6 and halves the zero-shot collision rate on nuScenes to 0.12%. These gains come with no added model capacity, no extra trajectory supervision, and no PDMS-based supervision.
 
 <p align="center">
   <img src="./assets/framework.webp" alt="GeoWAM architecture" width="100%"/>
